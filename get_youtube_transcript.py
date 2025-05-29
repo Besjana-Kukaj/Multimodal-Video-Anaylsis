@@ -1,6 +1,9 @@
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
+import webbrowser
+import os
 
-video_id = "3JZ_D3ELwOQ"
+
+video_id = "M3fYkEjq0hc"
 youtube_base_url = f"https://www.youtube.com/watch?v={video_id}"
 
 def format_timestamp(seconds):
@@ -122,3 +125,9 @@ if transcript:
     print("Transcript saved as transcript.html. Open this file in your browser to see clickable timestamps.")
 else:
     print("No transcript could be retrieved.")
+
+import webbrowser
+import os
+
+file_path = os.path.abspath("transcript.html")
+webbrowser.open(f"file://{file_path}")
