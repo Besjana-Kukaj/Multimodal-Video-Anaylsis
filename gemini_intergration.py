@@ -12,7 +12,7 @@ if not api_key:
     raise ValueError("API_KEY not found in environment variables. Please check your .env file.")
 client = genai.Client(api_key=api_key)
 
-video_id = "M3fYkEjq0hc"
+video_id = "QUNrBEhvXWQ"
 youtube_base_url = f"https://www.youtube.com/watch?v={video_id}"
 
 # Format timestamp helper
@@ -57,11 +57,12 @@ def generate_html_summaries(chunks, video_id):
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Smart Timestamps</title>
+<title>Multimodal Video Anaylsis</title>
 <style>
   body {{
     font-family: Arial, sans-serif;
     margin: 20px;
+    background-color: #d0e7ff; 
   }}
   .container {{
     display: flex;
@@ -87,10 +88,12 @@ def generate_html_summaries(chunks, video_id):
   .transcript-line {{
     margin-bottom: 10px;
   }}
+  .main-title {{
+    color: #000000; 
 </style>
 </head>
 <body>
-<h1>Smart Transcript Summary</h1>
+<h1 class="main-title">Main Topics of the Video!</h1>
 <div class="container">
   <div class="transcript">
 """
@@ -100,7 +103,7 @@ def generate_html_summaries(chunks, video_id):
         time_str = format_timestamp(start)
         summary = summarize_text(chunk["text"])
         html_content += f'<div class="transcript-line"><a class="timestamp" onclick="seekTo({start})">[{time_str}]</a>{summary}</div>\n'
-        time.sleep(0.5)  # Be kind to Gemini API
+        time.sleep(0.5) 
 
     html_content += f"""
   </div>
