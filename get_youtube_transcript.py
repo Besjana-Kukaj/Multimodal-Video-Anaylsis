@@ -1,5 +1,6 @@
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 
+#Get Transcript for a video or, if not found, auto-generate
 def get_transcript(video_id):
     try:
         return YouTubeTranscriptApi.get_transcript(video_id)
@@ -10,7 +11,11 @@ def get_transcript(video_id):
             return None
     except TranscriptsDisabled:
         return None
+    except Exception as e:
+        print(f"Unexpected error fetching transcript: {e}")
+        return None
 
+#Timestamp format
 def format_timestamp(seconds):
     seconds = int(seconds)
     h = seconds // 3600
@@ -21,6 +26,7 @@ def format_timestamp(seconds):
     else:
         return f"{m:02d}:{s:02d}"
 
+#Generate HTML with clickable timestamps
 def generate_html_transcript(transcript, video_id):
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
