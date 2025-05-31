@@ -1,21 +1,17 @@
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 from google import genai
 from dotenv import load_dotenv
-import webbrowser
 import os
 import time
 
-# Load .env
 load_dotenv()
 api_key = os.getenv("API_KEY")
 if not api_key:
     raise ValueError("API_KEY not found in environment variables. Please check your .env file.")
+
 client = genai.Client(api_key=api_key)
 
-video_id = "QUNrBEhvXWQ"
-youtube_base_url = f"https://www.youtube.com/watch?v={video_id}"
-
-# Format timestamp helper
+#Timestamp Format
 def format_timestamp(seconds):
     seconds = int(seconds)
     h = seconds // 3600
@@ -23,7 +19,7 @@ def format_timestamp(seconds):
     s = seconds % 60
     return f"{h:02d}:{m:02d}:{s:02d}" if h > 0 else f"{m:02d}:{s:02d}"
 
-# Chunk transcript into ~60s blocks
+#Chunk the Transcript
 def chunk_transcript(transcript, chunk_duration=60):
     chunks = []
     current_chunk = {"start": transcript[0]["start"], "text": ""}
@@ -39,30 +35,30 @@ def chunk_transcript(transcript, chunk_duration=60):
     chunks.append(current_chunk)
     return chunks
 
-# Use Gemini to generate summary of each chunk
+#Gemini summarizes each chunk
 def summarize_text(text):
     try:
         response = client.models.generate_content(
             model="gemini-2.0-flash",
             contents=f"Give a short 4–6 word title for this YouTube transcript segment. Be catchy, insightful, and concise. Just one title and no punctuation:\n\n{text}",
         )
-        return response.text.strip().strip('"')  # Remove quotes if Gemini adds them
+        return response.text.strip().strip('"')
     except Exception as e:
         return f"(Failed to summarize: {e})"
 
-
-# HTML generator
-def generate_html_summaries(chunks, video_id):
+#Generate HTML from the transcript chunks
+def generate_summary_html(transcript, video_id):
+    chunks = chunk_transcript(transcript)
     html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Multimodal Video Anaylsis</title>
+<title>Multimodal Video Analysis</title>
 <style>
   body {{
     font-family: Arial, sans-serif;
     margin: 20px;
-    background-color: #d0e7ff; 
+    background-color: #d0e7ff;
   }}
   .container {{
     display: flex;
@@ -89,7 +85,8 @@ def generate_html_summaries(chunks, video_id):
     margin-bottom: 10px;
   }}
   .main-title {{
-    color: #000000; 
+    color: #000000;
+  }}
 </style>
 </head>
 <body>
@@ -97,13 +94,12 @@ def generate_html_summaries(chunks, video_id):
 <div class="container">
   <div class="transcript">
 """
-
     for chunk in chunks:
         start = int(chunk["start"])
         time_str = format_timestamp(start)
         summary = summarize_text(chunk["text"])
         html_content += f'<div class="transcript-line"><a class="timestamp" onclick="seekTo({start})">[{time_str}]</a>{summary}</div>\n'
-        time.sleep(0.5) 
+        time.sleep(0.5)
 
     html_content += f"""
   </div>
@@ -143,24 +139,14 @@ def generate_html_summaries(chunks, video_id):
 """
     return html_content
 
-
-# Fetch and process transcript
-try:
-    transcript = YouTubeTranscriptApi.get_transcript(video_id)
-except NoTranscriptFound:
-    transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['en'])
-except TranscriptsDisabled:
-    print("Transcripts are disabled for this video.")
-    transcript = None
-
-if transcript:
-    chunks = chunk_transcript(transcript)
-    html_transcript = generate_html_summaries(chunks, video_id)
-
-    with open("smart_transcript.html", "w", encoding="utf-8") as f:
-        f.write(html_transcript)
-
-    print("Smart transcript saved as smart_transcript.html.")
-    webbrowser.open(f"file://{os.path.abspath('smart_transcript.html')}")
-else:
-    print("No transcript could be retrieved.")
+# Fetch transcript from get_youtube_transcript
+def get_transcript(video_id):
+    try:
+        return YouTubeTranscriptApi.get_transcript(video_id)
+    except NoTranscriptFound:
+        try:
+            return YouTubeTranscriptApi.get_transcript(video_id, languages=['en'])
+        except:
+            return None
+    except TranscriptsDisabled:
+        return None

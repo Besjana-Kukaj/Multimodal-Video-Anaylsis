@@ -1,13 +1,17 @@
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
-import webbrowser
-import os
 
-
-video_id = "M3fYkEjq0hc"
-youtube_base_url = f"https://www.youtube.com/watch?v={video_id}"
+def get_transcript(video_id):
+    try:
+        return YouTubeTranscriptApi.get_transcript(video_id)
+    except NoTranscriptFound:
+        try:
+            return YouTubeTranscriptApi.get_transcript(video_id, languages=['en'])
+        except:
+            return None
+    except TranscriptsDisabled:
+        return None
 
 def format_timestamp(seconds):
-    # Format seconds to mm:ss or hh:mm:ss if longer
     seconds = int(seconds)
     h = seconds // 3600
     m = (seconds % 3600) // 60
@@ -16,15 +20,6 @@ def format_timestamp(seconds):
         return f"{h:02d}:{m:02d}:{s:02d}"
     else:
         return f"{m:02d}:{s:02d}"
-
-try:
-    transcript = YouTubeTranscriptApi.get_transcript(video_id)
-except NoTranscriptFound:
-    # fallback to auto-generated transcript
-    transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['en'])
-except TranscriptsDisabled:
-    print("Transcripts are disabled for this video.")
-    transcript = None
 
 def generate_html_transcript(transcript, video_id):
     html_content = f"""<!DOCTYPE html>
@@ -113,21 +108,3 @@ def generate_html_transcript(transcript, video_id):
 </html>
 """
     return html_content
-
-
-
-if transcript:
-    html_transcript = generate_html_transcript(transcript, video_id)
-
-    with open("transcript.html", "w", encoding="utf-8") as f:
-        f.write(html_transcript)
-
-    print("Transcript saved as transcript.html. Open this file in your browser to see clickable timestamps.")
-else:
-    print("No transcript could be retrieved.")
-
-import webbrowser
-import os
-
-file_path = os.path.abspath("transcript.html")
-webbrowser.open(f"file://{file_path}")
