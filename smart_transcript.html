@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Smart Timestamps</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  .container {
+    display: flex;
+    gap: 20px;
+  }
+  .transcript {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 90vh;
+  }
+  .video {
+    flex: 1;
+  }
+  a.timestamp {
+    color: #007bff;
+    text-decoration: none;
+    margin-right: 8px;
+    cursor: pointer;
+  }
+  a.timestamp:hover {
+    text-decoration: underline;
+  }
+  .transcript-line {
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+<h1>Smart Transcript Summary</h1>
+<div class="container">
+  <div class="transcript">
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(0)">[00:00]</a>High School Ends What Now</div>
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(61)">[01:01]</a>College vs. Workforce: The Reality</div>
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(121)">[02:01]</a>Gap Year Dreams Reality Check</div>
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(181)">[03:01]</a>The Break Becomes a Freefall</div>
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(242)">[04:02]</a>**Fading Friends and Existential Grinding**</div>
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(302)">[05:02]</a>Friendships Fade Life Moves On</div>
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(363)">[06:03]</a>The Bum A Generation's Final Form</div>
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(424)">[07:04]</a>Post-Grad Life: Don't Get Stuck</div>
+
+  </div>
+  <div class="video">
+    <div id="player"></div>
+  </div>
+</div>
+
+<script>
+  var player;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '315',
+      width: '560',
+      videoId: 'M3fYkEjq0hc',
+      playerVars: {
+        'playsinline': 1
+      }
+    });
+  }
+
+  function seekTo(seconds) {
+    if (player && player.seekTo) {
+      player.seekTo(seconds, true);
+    }
+  }
+
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+</script>
+
+</body>
+</html>
