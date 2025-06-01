@@ -1,4 +1,6 @@
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
+from HTMLtoTXT import convert_html_to_txt
+
 
 #Get Transcript for a video or, if not found, auto-generate
 def get_transcript(video_id):
@@ -14,6 +16,29 @@ def get_transcript(video_id):
     except Exception as e:
         print(f"Unexpected error fetching transcript: {e}")
         return None
+
+#Update the transcript
+def update_transcript_html(video_id):
+    transcript = get_transcript(video_id)
+    if transcript is None:
+        print(f"No transcript found for video {video_id}")
+        return False
+
+    html_content = generate_html_transcript(transcript, video_id)
+
+    # Overwrite the transcript.html file
+    with open("transcript.html", "w", encoding="utf-8") as f:
+        f.write(html_content)
+
+    # Convert the updated HTML to transcript.txt
+    convert_html_to_txt()
+
+    print(f"Transcript files updated for video {video_id}")
+    return True
+
+
+
+
 
 #Timestamp format
 def format_timestamp(seconds):

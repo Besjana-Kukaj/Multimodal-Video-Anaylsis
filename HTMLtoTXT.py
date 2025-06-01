@@ -1,17 +1,13 @@
 from bs4 import BeautifulSoup
 
-#Loading the HTML transcript
-with open("transcript.html", "r", encoding="utf-8") as f:
-    html_content = f.read()
+def convert_html_to_txt(html_file="transcript.html", txt_file="transcript.txt"):
+    with open(html_file, "r", encoding="utf-8") as f:
+        html_content = f.read()
 
-#Parsing
-soup = BeautifulSoup(html_content, "html.parser")
-text = soup.get_text(separator="\n")
+    soup = BeautifulSoup(html_content, "html.parser")
+    text = soup.get_text(separator="\n")
 
-#Saved to txt
-with open("transcript.txt", "w", encoding="utf-8") as f:
-    f.write(text)
+    with open(txt_file, "w", encoding="utf-8") as f:
+        f.write(text)
 
-print("Transcript converted to transcript.txt")
-
-
+    print(f"Transcript converted to {txt_file}")

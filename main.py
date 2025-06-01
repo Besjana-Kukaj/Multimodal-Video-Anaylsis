@@ -3,7 +3,7 @@ from tkinter import messagebox
 import re
 import webbrowser
 import os
-from get_youtube_transcript import get_transcript
+from get_youtube_transcript import get_transcript, update_transcript_html
 from gemini_intergration import generate_summary_html
 
 #Get VideoID from User
@@ -18,6 +18,8 @@ def process_url():
     if not video_id:
         messagebox.showerror("Invalid URL", "Please enter a valid YouTube video URL.")
         return
+
+    update_transcript_html(video_id)
 
     transcript = get_transcript(video_id)
     if transcript is None:
