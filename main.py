@@ -33,7 +33,7 @@ def process_url():
 
 #GUI
 root = tk.Tk()
-root.title("Video Summarizer")
+root.title("Multimodal Video Anaylsis")
 root.geometry("400x200")
 root.configure(bg="#f0f8ff")
 
@@ -43,7 +43,7 @@ label.pack(pady=20)
 url_entry = tk.Entry(root, width=50)
 url_entry.pack()
 
-submit_btn = tk.Button(root, text="Generate Summary", command=process_url, bg="#007bff", fg="white", font=("Arial", 11))
+submit_btn = tk.Button(root, text="Submit", command=process_url, bg="#007bff", fg="white", font=("Arial", 11))
 submit_btn.pack(pady=20)
 
 root.mainloop()

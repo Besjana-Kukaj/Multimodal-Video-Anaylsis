@@ -63,14 +63,14 @@ html_template = """<!DOCTYPE html>
   #player {{
     width: 100%;
     max-width: 720px;
-    height: 405px; /* 16:9 ratio */
+    height: 405px; 
     border-radius: 15px;
     box-shadow: 0 6px 15px rgba(136,0,61,0.3);
     background: black;
   }}
   #chatbox {{
     margin-top: 20px;
-    background: #ffd6e8; /* lighter pink */
+    background: #ffd6e8; 
     padding: 15px;
     border-radius: 15px;
     width: 100%;
