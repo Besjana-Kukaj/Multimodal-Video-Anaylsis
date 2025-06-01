@@ -6,73 +6,126 @@ html_template = """<!DOCTYPE html>
 <style>
   body {{
     font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #d0e7ff;
+    margin: 0;
+    background-color: #ffe4ec; 
+    display: flex;
+    justify-content: center;
+    padding: 20px;
   }}
-  .container {{
+  .wrapper {{
     display: flex;
     gap: 20px;
+    max-width: 1200px;
+    width: 100%;
   }}
-  .transcript {{
-    flex: 1;
+
+  .main-topics {{
+    flex: 0 0 400px;
+    background: #ffcce1;
+    padding: 15px;
+    border-radius: 12px;
+    height: 90vh;
     overflow-y: auto;
-    max-height: 90vh;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-size: 0.9em;
+    color: #660029;
   }}
-  .video {{
-    flex: 1;
+
+  .main-topics h2 {{
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 12px;
   }}
-  a.timestamp {{
+
+  .topic-line {{
+    margin-bottom: 25px;
+  }}
+
+  .main-topics a.timestamp {{
     color: #007bff;
     text-decoration: none;
-    margin-right: 8px;
     cursor: pointer;
+    margin-right: 8px;
+    font-weight: bold;
   }}
-  a.timestamp:hover {{
+
+  .main-topics a.timestamp:hover {{
     text-decoration: underline;
   }}
-  .transcript-line {{
-    margin-bottom: 10px;
+
+  .main-video {{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }}
-  .main-title {{
-    color: #000000;
+  #player {{
+    width: 100%;
+    max-width: 720px;
+    height: 405px; /* 16:9 ratio */
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(136,0,61,0.3);
+    background: black;
   }}
   #chatbox {{
-    margin-top: 40px;
-    background: #ffffff;
+    margin-top: 20px;
+    background: #ffd6e8; /* lighter pink */
     padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    width: 100%;
+    max-width: 720px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }}
+  #chatbox h2 {{
+    margin-top: 0;
+    color: #660029;
   }}
   #chatlog {{
-    max-height: 300px;
+    max-height: 250px;
     overflow-y: auto;
-    border: 1px solid #ccc;
+    border: 1px solid #ffcce1;
     padding: 10px;
-    background: #f9f9f9;
+    background: #fff0f6;
     margin-bottom: 10px;
     white-space: pre-wrap;
+    border-radius: 8px;
   }}
   #chatInput {{
-    width: 80%;
+    width: 75%;
     padding: 10px;
     font-size: 1em;
+    border: 1px solid #ffcce1;
+    border-radius: 8px;
+    outline: none;
   }}
   #sendBtn {{
     padding: 10px 20px;
     font-size: 1em;
     margin-left: 10px;
+    background-color: #ff85a2;
+    border: none;
+    border-radius: 8px;
+    color: white;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+  }}
+  #sendBtn:hover {{
+    background-color: #ff4d73;
   }}
 </style>
 </head>
 <body>
-<h1 class="main-title">Main Topics of the Video!</h1>
-<div class="container">
-  <div class="transcript">
+
+<div class="wrapper">
+  <div class="main-topics">
+    <h2>Main Topics</h2>
     {transcript_lines}
   </div>
-  <div class="video">
+
+  <div class="main-video">
     <div id="player"></div>
+
     <div id="chatbox">
       <h2>Ask Questions About the Video</h2>
       <div id="chatlog"></div>
@@ -87,8 +140,8 @@ html_template = """<!DOCTYPE html>
 
   function onYouTubeIframeAPIReady() {{
     player = new YT.Player('player', {{
-      height: '315',
-      width: '560',
+      height: '405',
+      width: '720',
       videoId: '{video_id}',
       playerVars: {{
         'playsinline': 1
