@@ -1,0 +1,1791 @@
+
+
+
+
+
+
+
+
+YouTube Transcript
+
+
+
+
+
+
+
+
+Transcript for Video
+
+
+
+
+
+
+[00:00]
+hello world my name is Professor David J
+
+
+[00:02]
+malen I teach computer science at
+
+
+[00:03]
+Harvard and I'm here today to answer
+
+
+[00:05]
+your questions from Twitter this is
+
+
+[00:07]
+computer science support
+
+
+[00:09]
+[Music]
+
+
+[00:12]
+first up from Tad proletarian how do
+
+
+[00:15]
+search engines work so fast well the
+
+
+[00:17]
+short answer really is distributed
+
+
+[00:19]
+computing which is to say that Google
+
+
+[00:21]
+and Bing and other such search engines
+
+
+[00:24]
+they don't just have one server and they
+
+
+[00:25]
+don't even have just one really big
+
+
+[00:27]
+server rather they have hundreds
+
+
+[00:28]
+thousands probably hundreds of thousands
+
+
+[00:31]
+or more servers nowadays around the
+
+
+[00:33]
+world and so when you and I go in O2
+
+
+[00:35]
+Google or Bing and maybe type in a word
+
+
+[00:37]
+to search for like cat it's quite
+
+
+[00:40]
+possible that when you hit enter and
+
+
+[00:42]
+that keyword like cats is sent over the
+
+
+[00:44]
+internet to Google or to Bing it's
+
+
+[00:46]
+actually spread out ultimately across
+
+
+[00:48]
+multiple servers some of which are
+
+
+[00:50]
+grabbing the first 10 results some of
+
+
+[00:51]
+which are grabbing the next 10 results
+
+
+[00:52]
+the next 10 results so that you see just
+
+
+[00:55]
+one collection of results but a lot of
+
+
+[00:57]
+those ideas a lot of those search
+
+
+[00:58]
+results came from different places and
+
+
+[01:00]
+this eliminates what could potentially
+
+
+[01:02]
+be a bottleneck of sorts if all of the
+
+
+[01:04]
+information you needed had to come from
+
+
+[01:06]
+one specific server that might very well
+
+
+[01:08]
+be busy when you have that question Nick
+
+
+[01:10]
+asks will computer programming jobs to
+
+
+[01:13]
+be taken over by AI within the next five
+
+
+[01:15]
+to ten years this is such a frequently
+
+
+[01:17]
+Asked question nowadays and I don't
+
+
+[01:18]
+think the answer will be yes and I think
+
+
+[01:20]
+we've seen evidence of this already in
+
+
+[01:22]
+that early on when people were creating
+
+
+[01:24]
+websites they were literally writing out
+
+
+[01:25]
+code in a language called HTML by hand
+
+
+[01:28]
+but then of course software came along
+
+
+[01:29]
+tools like Dreamweaver that you could
+
+
+[01:31]
+download on your own computer that would
+
+
+[01:32]
+generate some of that same code for you
+
+
+[01:34]
+more recently though now you can just
+
+
+[01:35]
+sign up for websites like Squarespace
+
+
+[01:37]
+and Wix and others whereby click click
+
+
+[01:39]
+click and the website is generated for
+
+
+[01:41]
+you so I dare say certainly in some
+
+
+[01:43]
+domains that AI is really just an
+
+
+[01:45]
+evolution of that Trend and it hasn't
+
+
+[01:47]
+put humans out of business as much as it
+
+
+[01:49]
+has made you and I much more productive
+
+
+[01:51]
+AI I think and the ability soon to be
+
+
+[01:54]
+able to program with natural language is
+
+
+[01:56]
+just going to enhance what you and I can
+
+
+[01:58]
+already do logically but much more
+
+
+[02:00]
+mechanically and I think too it's worth
+
+
+[02:01]
+considering that there's just so many
+
+
+[02:03]
+bugs or mistakes in software in the
+
+
+[02:05]
+world and there's so many features that
+
+
+[02:07]
+humans wish existed in products present
+
+
+[02:09]
+and future that are to-do list so to
+
+
+[02:11]
+speak is way longer than will ever have
+
+
+[02:13]
+time to finish in our lifetimes and so I
+
+
+[02:16]
+think the prospect to having an
+
+
+[02:17]
+artificial intelligence boost our
+
+
+[02:19]
+productivity and work alongside us so to
+
+
+[02:22]
+speak as we try to solve problems is
+
+
+[02:24]
+just going to mean that you and I and
+
+
+[02:25]
+the world together can solve so many
+
+
+[02:27]
+more problems and move forward together
+
+
+[02:29]
+at an even faster rate all right next up
+
+
+[02:32]
+Sophia who asks how do microchips even
+
+
+[02:34]
+work it's just a green piece of metal
+
+
+[02:36]
+well here for instance we have a whole
+
+
+[02:39]
+bunch of microchips on what's called a
+
+
+[02:40]
+logic board or sometimes known as a
+
+
+[02:42]
+motherboard there's a lot of ports that
+
+
+[02:44]
+you might be familiar with for instance
+
+
+[02:45]
+like here are some ports for audio here
+
+
+[02:47]
+are some ports for networking here's
+
+
+[02:49]
+some ports for USB and some other
+
+
+[02:51]
+devices as well and those ports
+
+
+[02:52]
+meanwhile are connected to lots of
+
+
+[02:54]
+different chips on this board that know
+
+
+[02:56]
+how to interpret the signals from those
+
+
+[02:58]
+ports and perhaps the biggest chip on
+
+
+[03:00]
+this motherboard tends to be this thing
+
+
+[03:02]
+here called the CPU or the central
+
+
+[03:03]
+processing unit which is really the
+
+
+[03:05]
+brains of the computer and what you
+
+
+[03:07]
+can't necessarily quite see because most
+
+
+[03:08]
+of this is actually paint and not traces
+
+
+[03:10]
+but if I flip this around you'll
+
+
+[03:12]
+actually see in the right light and with
+
+
+[03:14]
+the right angle a whole bunch of traces
+
+
+[03:16]
+running up down left and right on this
+
+
+[03:18]
+logic board that's connecting all of
+
+
+[03:20]
+these various microchips and by Trace I
+
+
+[03:22]
+mean a tiny little wire that's been
+
+
+[03:24]
+etched into the top or the bottom of
+
+
+[03:26]
+this circuit board that connects two
+
+
+[03:27]
+parts thereon now what might these
+
+
+[03:29]
+microchips be doing well again they
+
+
+[03:30]
+might be simply interpreting signals
+
+
+[03:32]
+that are coming in from these ports two
+
+
+[03:34]
+they might be performing mathematical
+
+
+[03:35]
+operations doing something with those
+
+
+[03:37]
+signals in order to convert input into
+
+
+[03:39]
+output or they might just be storing
+
+
+[03:41]
+information ultimately in fact there's
+
+
+[03:43]
+all different types of memory on a logic
+
+
+[03:45]
+board like this be it Ram or ROM or the
+
+
+[03:47]
+like and so some of those chips might
+
+
+[03:49]
+very well be storing information for as
+
+
+[03:51]
+long as the computer is plugged in or in
+
+
+[03:53]
+some cases depending on the device even
+
+
+[03:55]
+when the power goes off alright next a
+
+
+[03:57]
+question from nkhe so if anyone can
+
+
+[03:59]
+learn coding what do computer scientists
+
+
+[04:01]
+do for four years in University
+
+
+[04:03]
+typically in an undergraduate program in
+
+
+[04:05]
+computer science or computer engineering
+
+
+[04:07]
+or a similar field someone spends much
+
+
+[04:10]
+more time learning about the field
+
+
+[04:12]
+itself than about programming
+
+
+[04:13]
+specifically so as such you might study
+
+
+[04:15]
+not only a bit of programming but also
+
+
+[04:17]
+mathematics certain fundamentals that
+
+
+[04:19]
+transcend the particular classes you
+
+
+[04:21]
+might have taken in middle school or
+
+
+[04:22]
+high school but that can be used to
+
+
+[04:24]
+solve Grand or real world problems you
+
+
+[04:26]
+might learn something about networks how
+
+
+[04:28]
+you can send information from point A to
+
+
+[04:29]
+point B you might learn about Graphics
+
+
+[04:31]
+how you can display things on the screen
+
+
+[04:33]
+or even create interactive animations or
+
+
+[04:35]
+the like you might learn how to leverage
+
+
+[04:37]
+certain ideas from mathematics and other
+
+
+[04:39]
+fields to implement your very own
+
+
+[04:40]
+artificial intelligence nowadays whereby
+
+
+[04:43]
+you use probability and statistics and
+
+
+[04:46]
+information more generally to try to
+
+
+[04:47]
+predict what a intelligent individual or
+
+
+[04:50]
+in this case computer might say in
+
+
+[04:52]
+response to a question so computer it's
+
+
+[04:54]
+science itself is a very broad field and
+
+
+[04:56]
+programming is really just a tool that
+
+
+[04:58]
+you tend to learn along the way from
+
+
+[05:00]
+Maya Shelby how do zeros and ones turn
+
+
+[05:03]
+into the internet well I think the
+
+
+[05:05]
+simplest answer there is that the
+
+
+[05:07]
+internet is built upon layers and layers
+
+
+[05:09]
+and layers of ideas and if we start at
+
+
+[05:11]
+the lowest of those levels zeros and
+
+
+[05:13]
+ones you have something called binary
+
+
+[05:14]
+where zeros and ones can be used to
+
+
+[05:16]
+represent any other numbers as well and
+
+
+[05:18]
+if we use more and more zeros and ones
+
+
+[05:20]
+more and more binary digits or bits so
+
+
+[05:22]
+to speak we can count up higher and
+
+
+[05:24]
+higher and higher and then if you and I
+
+
+[05:26]
+agree that all right well let's not just
+
+
+[05:27]
+use these patterns of zeros and ones to
+
+
+[05:29]
+represent numbers what if we reserve
+
+
+[05:31]
+some of these patterns to represent
+
+
+[05:33]
+letters of like the English alphabet and
+
+
+[05:35]
+then maybe you and I can decide to
+
+
+[05:36]
+reserve certain patterns of zeros and
+
+
+[05:38]
+ones to represent colors like red and
+
+
+[05:40]
+green and blue in combinations thereof
+
+
+[05:42]
+well once we have the ability to
+
+
+[05:44]
+represent colors we could then represent
+
+
+[05:46]
+whole pictures because what's a picture
+
+
+[05:48]
+on your phone or a computer screen well
+
+
+[05:50]
+it's really just a grid of dots Each of
+
+
+[05:52]
+which has its own color so this is all
+
+
+[05:54]
+to say that even if we start at this
+
+
+[05:55]
+lowest level of just zeros and ones so
+
+
+[05:58]
+long as you and I and all of the devices
+
+
+[06:00]
+we use agree to follow some standard
+
+
+[06:02]
+like this we can build these layers and
+
+
+[06:04]
+layers of abstraction so to speak on top
+
+
+[06:06]
+of one another until finally you and I
+
+
+[06:09]
+come up with a pattern of zeros and ones
+
+
+[06:10]
+that represents send this piece of of
+
+
+[06:12]
+information from me over there and thus
+
+
+[06:15]
+we have something like the internet
+
+
+[06:17]
+Majin Buu asks can someone that knows
+
+
+[06:19]
+computer science explain to me why
+
+
+[06:21]
+computers use binary coding and not
+
+
+[06:23]
+trinary when trinary is supposed to be
+
+
+[06:25]
+faster so it's not necessarily the case
+
+
+[06:27]
+that a trinary system which would use
+
+
+[06:29]
+three symbols for instance zero one and
+
+
+[06:31]
+two would necessarily be faster than
+
+
+[06:33]
+binary because binary using just zero
+
+
+[06:36]
+and one tends to be simpler to implement
+
+
+[06:38]
+and also more robust to potential errors
+
+
+[06:40]
+or if you're familiar with voltage
+
+
+[06:42]
+levels like in a battery it's very easy
+
+
+[06:44]
+for a computer to distinguish something
+
+
+[06:45]
+for like zero volts or three volts but
+
+
+[06:48]
+it gets a little harder if we try to
+
+
+[06:50]
+draw the line somewhere in between
+
+
+[06:51]
+because there's just a higher
+
+
+[06:52]
+probability that a computer might
+
+
+[06:54]
+mistake a a voltage level like 1.5 in
+
+
+[06:57]
+the middle is maybe being a little
+
+
+[06:58]
+closer to off than on or to on than off
+
+
+[07:02]
+here too is where even though there
+
+
+[07:03]
+might be mathematical efficiencies in
+
+
+[07:05]
+real world efficiencies to using trinary
+
+
+[07:07]
+otherwise known as ternary like a zero a
+
+
+[07:10]
+one and a two digit instead of just
+
+
+[07:12]
+zeros and ones it turns out because our
+
+
+[07:14]
+world runs on electricity nowadays and
+
+
+[07:16]
+there's so much momentum behind binary
+
+
+[07:17]
+that it just tends to be a net positive
+
+
+[07:20]
+Rachel P95 asks why is every Windows
+
+
+[07:23]
+solution have you tried restarting and
+
+
+[07:25]
+why does that always work so that's a
+
+
+[07:27]
+very heavy-handed solution to what are
+
+
+[07:29]
+typically just bugs or mistakes in
+
+
+[07:31]
+software for instance windows in this
+
+
+[07:33]
+case restarting a computer just starts
+
+
+[07:35]
+everything from scratch so all of the
+
+
+[07:37]
+computers short-term memory is lost and
+
+
+[07:39]
+everything starts in pristine condition
+
+
+[07:40]
+which is to say that it starts in
+
+
+[07:42]
+exactly the way that the programmers at
+
+
+[07:44]
+Microsoft intended without potentially
+
+
+[07:46]
+the distractions of the computer being
+
+
+[07:47]
+in some weird state or condition that
+
+
+[07:49]
+the programmers just didn't anticipate
+
+
+[07:51]
+maybe you clicked on some buttons in a
+
+
+[07:53]
+weird order maybe you opened a strange
+
+
+[07:54]
+file but you maybe you got the computer
+
+
+[07:56]
+into a state that just wasn't programmed
+
+
+[07:58]
+for properly Jason Whitmer now asks
+
+
+[08:00]
+what's the best operating system well
+
+
+[08:02]
+this is one of these questions in
+
+
+[08:03]
+Computing we would call a religious
+
+
+[08:05]
+question since it evokes a religious
+
+
+[08:07]
+debate as to which might be best of
+
+
+[08:08]
+course among the most popular operating
+
+
+[08:10]
+systems out there are windows and Mac OS
+
+
+[08:13]
+but there's also one you might not have
+
+
+[08:14]
+heard of which is called Linux which is
+
+
+[08:16]
+actually very omnipresent in the
+
+
+[08:18]
+Enterprise world so many of today's
+
+
+[08:19]
+servers actually run Linux so many of
+
+
+[08:21]
+today's desktops or laptops though run
+
+
+[08:23]
+Windows or Mac OS now that's not to say
+
+
+[08:26]
+you couldn't run all of those operating
+
+
+[08:27]
+systems in different contexts and some
+
+
+[08:29]
+of us do actually run Linux on our own
+
+
+[08:31]
+computers so a lot of it is really boils
+
+
+[08:33]
+down to personal preference I wouldn't
+
+
+[08:35]
+even say that there's one best operating
+
+
+[08:37]
+system but there tend to be correlations
+
+
+[08:39]
+between the operating systems people use
+
+
+[08:41]
+and the applications they have in mind
+
+
+[08:42]
+so windows for instance is so popular in
+
+
+[08:45]
+the world of PCS and desktops and
+
+
+[08:46]
+laptops Mac OS is to some extent
+
+
+[08:48]
+particularly in Academia in certain
+
+
+[08:50]
+countries but not necessarily on the
+
+
+[08:52]
+same scale Linux by contrast is again
+
+
+[08:54]
+very much used heavily in the
+
+
+[08:56]
+server-side industry but so is Windows
+
+
+[08:58]
+as well so a lot of the choice for
+
+
+[09:00]
+operating systems sometimes comes from
+
+
+[09:02]
+just what's most appropriate what's most
+
+
+[09:04]
+popular what's most supportive but some
+
+
+[09:05]
+of it comes too from just personal
+
+
+[09:07]
+preference of the engineer maybe the
+
+
+[09:08]
+first engineer that you hire to make one
+
+
+[09:10]
+of those decisions so it's more about
+
+
+[09:12]
+what what's best for you and not so much
+
+
+[09:14]
+best in general next Julio magnifico
+
+
+[09:17]
+asks why aren't computers getting
+
+
+[09:18]
+cheaper well computers or at least
+
+
+[09:20]
+computer parts inside of computers do
+
+
+[09:23]
+tend to get cheaper the catch is that
+
+
+[09:25]
+your expectations and my expectations
+
+
+[09:27]
+just keep Rising we want our phones our
+
+
+[09:29]
+laptops our desktops to do more and more
+
+
+[09:31]
+in the way of the software that they run
+
+
+[09:33]
+the games that we use and just how
+
+
+[09:35]
+quickly they perform for us so even
+
+
+[09:37]
+though some of those parts are getting
+
+
+[09:38]
+less expensive you and I want them to do
+
+
+[09:41]
+more and more and be faster and larger
+
+
+[09:43]
+in quantity and so as a result I dare
+
+
+[09:45]
+say that the price isn't going down as
+
+
+[09:47]
+far as you might hope that said nowadays
+
+
+[09:49]
+you can get for the same amount of money
+
+
+[09:51]
+from yesteryear much much more in the
+
+
+[09:54]
+way of computing power so arguably it's
+
+
+[09:56]
+working to our benefit in some cases
+
+
+[09:58]
+next up from Darrow nabila can someone
+
+
+[10:01]
+explain cloud computing to me like a
+
+
+[10:03]
+five-year-old cloud computing is
+
+
+[10:04]
+essentially you using someone else's
+
+
+[10:06]
+servers that someone is paying to rent
+
+
+[10:09]
+for instance or timeshare so this isn't
+
+
+[10:11]
+really a new idea or or new technology
+
+
+[10:13]
+rather it's a better branding of a
+
+
+[10:15]
+technique that's been used for years not
+
+
+[10:16]
+just in the computer world but in the
+
+
+[10:18]
+real world as well whereby someone like
+
+
+[10:19]
+Google or Microsoft or apple or others
+
+
+[10:21]
+nowadays might be able to afford lots
+
+
+[10:24]
+and lots and lots of servers and then
+
+
+[10:25]
+make those servers available in part to
+
+
+[10:27]
+me to you and many other customers as
+
+
+[10:30]
+well hey I'm Marcus hey Marcus well
+
+
+[10:32]
+Marcus asks how does computer memory
+
+
+[10:34]
+work think of computer memory as really
+
+
+[10:37]
+being driven by a whole bunch of
+
+
+[10:38]
+switches that can either be turned on
+
+
+[10:39]
+and off so for instance if I take this
+
+
+[10:42]
+here light switch which is currently off
+
+
+[10:44]
+I could simply say that this switch here
+
+
+[10:46]
+is representing the number zero in
+
+
+[10:48]
+binary but if I turn the switch on well
+
+
+[10:50]
+now I can say that I'm representing the
+
+
+[10:52]
+number one now of course I can only
+
+
+[10:54]
+count as high as 0 to 1 with a single
+
+
+[10:57]
+light switch but what if I bring over a
+
+
+[10:59]
+second light switch like this one here
+
+
+[11:01]
+if we start at zero in this way turn on
+
+
+[11:04]
+this switch first and claim that it's
+
+
+[11:06]
+one let me now be more creative and turn
+
+
+[11:09]
+this one off and this one on and now
+
+
+[11:11]
+claim this is how how a computer's
+
+
+[11:13]
+memory could represent the number two
+
+
+[11:14]
+and now if I turn this switch back on
+
+
+[11:16]
+giving me a fourth pattern this is how I
+
+
+[11:19]
+might represent the number three now of
+
+
+[11:21]
+course if we add more and more of these
+
+
+[11:22]
+switches more and more of these light
+
+
+[11:24]
+bulbs we can count even higher than
+
+
+[11:26]
+three and indeed that's what a
+
+
+[11:27]
+computer's memory is ultimately doing
+
+
+[11:29]
+it's using lots and lots of little tiny
+
+
+[11:32]
+switches otherwise known as transistors
+
+
+[11:34]
+to turn the flow of electricity on and
+
+
+[11:36]
+off and then it's got other types of
+
+
+[11:37]
+Hardware called for instance capacitors
+
+
+[11:40]
+that have a capacity to hold on to some
+
+
+[11:42]
+of that electricity just like the light
+
+
+[11:44]
+bulb there being on all right next
+
+
+[11:46]
+Donnie asks how do you explain web 3 to
+
+
+[11:49]
+people so web3 like web 2 and
+
+
+[11:52]
+retrospectively web one or really just
+
+
+[11:54]
+buzzwords that describe sort of phases
+
+
+[11:56]
+of the internet or the World Wide Web as
+
+
+[11:58]
+you and I know it for instance back in
+
+
+[12:00]
+the day when there was just the World
+
+
+[12:01]
+Wide Web now perhaps referred to as web
+
+
+[12:04]
+version one information was largely
+
+
+[12:06]
+static if you were to create a website
+
+
+[12:08]
+on the internet you would type up your
+
+
+[12:10]
+code you would type up your content you
+
+
+[12:11]
+would put it on a server somewhere and
+
+
+[12:13]
+someone could read that information but
+
+
+[12:16]
+it was you the web developer or you the
+
+
+[12:19]
+owner of the website that was creating
+
+
+[12:20]
+that content for other people to
+
+
+[12:22]
+actually read and consume in web 2 the
+
+
+[12:24]
+world became much more dynamic in recent
+
+
+[12:27]
+years whereby now websites tend to have
+
+
+[12:29]
+databases and they have more
+
+
+[12:31]
+sophistication so that a lot of the
+
+
+[12:33]
+content in websites today are actually
+
+
+[12:35]
+coming from me and from you so if you
+
+
+[12:37]
+think of any social media site it's not
+
+
+[12:39]
+the owners of those sites that are
+
+
+[12:40]
+creating most of the content it's you
+
+
+[12:42]
+and me as the users of those same
+
+
+[12:44]
+websites but in web 2 everything is
+
+
+[12:46]
+nonetheless very centralized whether
+
+
+[12:48]
+you're Twitter or Facebook now meta or
+
+
+[12:50]
+other companies all of that data even in
+
+
+[12:52]
+the world of social media that's coming
+
+
+[12:54]
+from me and you is actually being stored
+
+
+[12:56]
+centrally on those company servers so
+
+
+[12:58]
+web 3.0 or web 3 so to speak is really
+
+
+[13:02]
+about transitioning away potentially
+
+
+[13:04]
+from that very centralized model to one
+
+
+[13:06]
+that's more distributed where the data
+
+
+[13:08]
+that you and I are creating whereby the
+
+
+[13:10]
+data you and I are consuming is actually
+
+
+[13:12]
+distributed over multiple servers over a
+
+
+[13:15]
+technique called blockchain for instance
+
+
+[13:17]
+in some cases whereby there's not
+
+
+[13:19]
+necessarily one owner of that data but
+
+
+[13:21]
+really Collective ownership and
+
+
+[13:23]
+therefore verification that the data
+
+
+[13:25]
+Maybe indeed came from me and you next a
+
+
+[13:29]
+question from gomo tigers can someone
+
+
+[13:30]
+explain to me the difference between
+
+
+[13:32]
+firmware and software Hardware is
+
+
+[13:34]
+physical software is code WTF is
+
+
+[13:37]
+firmware firmware is really a synonym
+
+
+[13:39]
+for a type of software so firmware is
+
+
+[13:41]
+just software but it tends to be
+
+
+[13:43]
+software that comes built into your
+
+
+[13:46]
+hardware and you can think of in the
+
+
+[13:48]
+simplest scenario that firmware is
+
+
+[13:49]
+software that is just completely
+
+
+[13:51]
+integrated into the hardware and itself
+
+
+[13:53]
+cannot be changed or even upgraded but
+
+
+[13:55]
+that's a bit of an oversimplification
+
+
+[13:57]
+because even firmware typically when it
+
+
+[13:59]
+comes in a computer when it comes in a
+
+
+[14:01]
+phone or some other device can very
+
+
+[14:03]
+often be updated why because the
+
+
+[14:05]
+firmware is the software that's really
+
+
+[14:06]
+closest to the hardware and in that
+
+
+[14:08]
+sense it might very well be the most
+
+
+[14:09]
+important and if anything goes wrong
+
+
+[14:11]
+with The Firm where you might not even
+
+
+[14:12]
+be able to turn that device on whether
+
+
+[14:14]
+it's a phone or computer or even your
+
+
+[14:16]
+refrigerator nowadays alright that's all
+
+
+[14:18]
+the questions for today we hoped you
+
+
+[14:19]
+learned a little something along the way
+
+
+[14:21]
+we'll see you next time
+
+
+[14:22]
+[Music]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
