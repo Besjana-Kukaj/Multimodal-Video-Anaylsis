@@ -2,90 +2,117 @@
 from sentence_transformers import SentenceTransformer
 import numpy as np
 from llama_cpp import Llama
-import os  # <-- Make sure to import os for os.cpu_count()
+import os
 
 
 class ChatHandler:
-    def __init__(self, transcript_data):  # Renamed parameter for clarity
+    def __init__(self):
+        print("ChatHandler: Initializing SentenceTransformer and Llama model (once)...")
         self.embedder = SentenceTransformer('all-MiniLM-L6-v2')
-
-        # --- CORRECTED Llama Initialization ---
         self.llm = Llama(
             model_path='./models/mistral-7b-instruct-v0.1.Q4_K_M.gguf',
-            n_ctx=4096,  # Try a larger context window, 2048 or 4096 is common for Mistral
-            n_batch=512,  # How many tokens to process in parallel during prompt evaluation. Can affect speed/memory.
-            n_threads=os.cpu_count(),  # Use all available CPU cores for processing
-            verbose=True  # Enable verbose output for Llama, useful for debugging
+            n_ctx=4096,
+            n_batch=512,
+            n_threads=os.cpu_count(),
+            verbose=True
         )
-        # --- END CORRECTED Llama Initialization ---
+        self.current_video_id = None
+        self.vector_db = []
+        print("ChatHandler: Initialization complete.")
 
-        self.vector_db = []  # This line MUST be inside __init__
-        # Iterate through the list of dictionaries returned by YouTubeTranscriptApi
+    def _build_vector_db(self, transcript_data):
+        """Builds the vector database from the given transcript data."""
+        print(f"ChatHandler: Building vector database with {len(transcript_data)} snippets.")
+        new_vector_db = []
         for snippet in transcript_data:
-            # Extract the 'text' from the dictionary and strip whitespace
             chunk_text = snippet.get('text', '').strip()
-
-            # Only process if there's actual text content
             if chunk_text:
-                # Encode the actual text string
                 embedding = self.embedder.encode(chunk_text).tolist()
-                self.vector_db.append((chunk_text, embedding))
-            else:
-                print(f"Warning: Skipping empty or invalid transcript snippet: {snippet}")
+                new_vector_db.append((chunk_text, embedding))
+            # else:
+            # print(f"Warning: Skipping empty or invalid transcript snippet: {snippet}")
+        return new_vector_db
 
     def cosine_similarity(self, a, b):
-        # Ensure inputs are numpy arrays for calculation, then convert result
         a_np = np.array(a)
         b_np = np.array(b)
         dot = np.dot(a_np, b_np)
         norm_a = np.linalg.norm(a_np)
         norm_b = np.linalg.norm(b_np)
-
-        # Handle division by zero for embeddings that might be all zeros
         if norm_a == 0 or norm_b == 0:
             return 0.0
-
-        # Explicitly convert to standard Python float at the end of calculation
         return float(dot / (norm_a * norm_b))
 
     def retrieve(self, query, top_n=3):
-        # Encode the query and convert to a standard Python list
+        if not self.vector_db:
+            print("Warning: Attempted to retrieve from an empty vector_db (no transcript loaded).")
+            return []
+
         query_embedding = self.embedder.encode(query).tolist()
         scored_chunks = []
-        for chunk_text, emb in self.vector_db:  # chunk_text is now a string
+        for chunk_text, emb in self.vector_db:
             sim = self.cosine_similarity(query_embedding, emb)
             scored_chunks.append((chunk_text, sim))
         scored_chunks.sort(key=lambda x: x[1], reverse=True)
         return scored_chunks[:top_n]
 
-    def respond(self, user_query):
+    def ask_question(self, user_query, video_id, transcript_fetcher_func):
+        """
+        Main method to ask a question. Handles transcript fetching and context management.
+        :param user_query: The question from the user.
+        :param video_id: The ID of the current YouTube video.
+        :param transcript_fetcher_func: A callable function (e.g., get_transcript from main.py)
+                                        that takes video_id and returns transcript data.
+        """
+     #Check to see if video_id changed
+        if video_id != self.current_video_id or not self.vector_db:
+            print(f"ChatHandler: Video ID changed or no context. Fetching new transcript for {video_id}.")
+            try:
+                transcript_data = transcript_fetcher_func(video_id)
+                if not transcript_data:
+                    return "(Sorry, no transcript found for this video.)"
+
+                self.vector_db = self._build_vector_db(transcript_data)
+                if not self.vector_db:
+                    return "(Transcript found but no valid text chunks for analysis.)"
+                self.current_video_id = video_id
+            except Exception as e:
+                print(f"ChatHandler: Error fetching or processing transcript for {video_id}: {e}")
+                return "(Error fetching video transcript.)"
+        else:
+            print(f"ChatHandler: Reusing existing transcript context for {video_id}.")
+
+    #Retrieve relevant context for the response
         retrieved = self.retrieve(user_query)
         context_parts = []
+        if not retrieved:
+            return "(Could not find relevant information in the video transcript.)"
+
         for chunk_text, _ in retrieved:
             context_parts.append(f'- {str(chunk_text)}\n')
         context = ''.join(context_parts)
 
+        # 3. Construct prompt for LLM
         print(
             f"\n--- Context for LLM for query '{user_query}': ---\n{context}\n---------------------------------------------\n")
-
-        # --- MODIFIED PROMPT ---
         prompt = (
-            "You are a helpful chatbot. Based on the provided context, answer the user's question concisely.\n"
+            "You are a helpful chatbot. Based on the provided context, answer the user's question concisely and consideratley.\n"
             "Use only the following pieces of context to answer the question. "
             "Do not make up new information. If the answer cannot be found, state that you don't know.\n"
-            f"Context:\n{context}\n"  # Explicitly label context
+            f"Context:\n{context}\n"
             f"Question: {str(user_query)}\n"
-            "Answer:"  # Explicitly ask for an answer
+            "Answer:"
         )
+
 
         try:
             result = self.llm.create_completion(
                 prompt=prompt,
                 max_tokens=200,
-                temperature=0.7,  # Increase temperature from default (often 0.0 or 0.1)
-                top_p=0.9,  # Adjust top_p
-                top_k=40,  # Adjust top_k
-                stop=["\nQuestion:", "\nAI:", "\nHuman:", "\nUser:", "\nAssistant:"]  # Add more common stop sequences
+                temperature=0.7,
+                top_p=0.9,
+                top_k=40,
+                stop=["\nQuestion:", "\nAI:", "\nHuman:", "\nUser:", "\nAssistant:"]
             )
             print("LLM output:", result)
 
@@ -100,7 +127,4 @@ class ChatHandler:
                 return "(No response from AI, unexpected output format.)"
         except Exception as e:
             print(f"Error during LLM completion: {e}")
-            raise  # Re-raise the exception to be caught by the Flask route
-
-    def ask(self, question):
-        return self.respond(question)
+            return "(An internal error occurred while generating a response.)"
