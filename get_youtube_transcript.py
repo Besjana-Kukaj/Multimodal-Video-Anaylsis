@@ -1,20 +1,45 @@
+# get_youtube_transcript.py
+
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 from HTMLtoTXT import convert_html_to_txt
-
+import requests # Import requests for potential connection issues
 
 #Get Transcript for a video or, if not found, auto-generate
 def get_transcript(video_id):
     try:
-        return YouTubeTranscriptApi.get_transcript(video_id)
+        # Attempt to get transcript normally
+        print(f"Attempting to fetch transcript for video ID: {video_id}")
+        transcript = YouTubeTranscriptApi.get_transcript(video_id)
+        print(f"Successfully fetched transcript for video ID: {video_id}")
+        return transcript
     except NoTranscriptFound:
+        print(f"No transcript found for {video_id} directly. Trying with 'en' language.")
         try:
-            return YouTubeTranscriptApi.get_transcript(video_id, languages=['en'])
-        except:
+            # Try with 'en' language explicitly
+            transcript = YouTubeTranscriptApi.get_transcript(video_id, languages=['en'])
+            print(f"Successfully fetched English transcript for video ID: {video_id}")
+            return transcript
+        except NoTranscriptFound:
+            print(f"No English transcript found for {video_id}.")
+            return None
+        except TranscriptsDisabled:
+            print(f"Transcripts are disabled for video {video_id} even for 'en'.")
+            return None
+        except requests.exceptions.ConnectionError as e:
+            print(f"Network error trying to fetch English transcript for {video_id}: {e}")
+            return None
+        except Exception as e:
+            print(f"Unexpected error fetching English transcript for {video_id}: {e}")
             return None
     except TranscriptsDisabled:
+        print(f"Transcripts are disabled for video {video_id}.")
+        return None
+    except requests.exceptions.ConnectionError as e:
+        print(f"Network error trying to fetch transcript for {video_id}: {e}")
         return None
     except Exception as e:
-        print(f"Unexpected error fetching transcript: {e}")
+        # This catches the 'no element found' error or any other unhandled exceptions
+        print(f"Critical error fetching transcript for {video_id}: {e}")
         return None
 
 #Update the transcript

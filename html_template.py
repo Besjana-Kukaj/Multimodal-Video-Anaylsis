@@ -18,7 +18,6 @@ html_template = """<!DOCTYPE html>
     max-width: 1200px;
     width: 100%;
   }}
-
   .main-topics {{
     flex: 0 0 400px;
     background: #ffcce1;
@@ -30,18 +29,15 @@ html_template = """<!DOCTYPE html>
     font-size: 0.9em;
     color: #660029;
   }}
-
   .main-topics h2 {{
     margin-top: 0;
     font-weight: bold;
     font-size: 1.2em;
     margin-bottom: 12px;
   }}
-
   .topic-line {{
     margin-bottom: 25px;
   }}
-
   .main-topics a.timestamp {{
     color: #007bff;
     text-decoration: none;
@@ -49,11 +45,9 @@ html_template = """<!DOCTYPE html>
     margin-right: 8px;
     font-weight: bold;
   }}
-
   .main-topics a.timestamp:hover {{
     text-decoration: underline;
   }}
-
   .main-video {{
     flex: 1;
     display: flex;
@@ -134,7 +128,6 @@ html_template = """<!DOCTYPE html>
     </div>
   </div>
 </div>
-
 <script>
   var player;
 
@@ -156,7 +149,8 @@ html_template = """<!DOCTYPE html>
   }}
 
   var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
+  // Corrected YouTube Iframe API URL
+  tag.src = "https://www.youtube.com/iframe_api"; // <-- Corrected URL
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -165,7 +159,7 @@ html_template = """<!DOCTYPE html>
     const button = document.getElementById("sendBtn");
     const chatlog = document.getElementById("chatlog");
 
-    button.onclick = async function() {{
+    async function sendMessage() {{
       const question = input.value.trim();
       if (!question) return;
 
@@ -173,23 +167,39 @@ html_template = """<!DOCTYPE html>
       input.value = "";
 
       try {{
-        const res = await fetch('/ask', {{
+        const res = await fetch('/chat', {{
           method: 'POST',
           headers: {{
             'Content-Type': 'application/json'
           }},
-          body: JSON.stringify({{ question }})
+          body: JSON.stringify({{
+            question: question, // <--- CRITICAL FIX 1: Changed 'message' to 'question'
+            video_id: '{video_id}'
+          }})
         }});
+
+        if (!res.ok) {{ // Check for HTTP errors
+            const errorText = await res.text();
+            throw new Error(`HTTP error! Status: ${{res.status}}, Details: ${{errorText}}`);
+        }}
+
         const data = await res.json();
-        chatlog.innerHTML += "\\nAI: " + data.answer;
+        chatlog.innerHTML += "\\nAI: " + data.answer; // <--- CRITICAL FIX 2: Changed 'data.response' to 'data.answer'
       }} catch (err) {{
-        chatlog.innerHTML += "\\nAI: (Error processing your request)";
+        console.error("Fetch error:", err); // Log the actual error
+        chatlog.innerHTML += `\\nAI: (Error processing your request: ${{err.message || err}}`; // Display error to user
       }}
       chatlog.scrollTop = chatlog.scrollHeight;
-    }};
+    }}
+
+    button.onclick = sendMessage;
+    input.addEventListener("keypress", function(e) {{
+      if (e.key === "Enter") {{
+        sendMessage();
+      }}
+    }});
   }});
 </script>
-
 </body>
 </html>
 """

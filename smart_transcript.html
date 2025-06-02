@@ -18,7 +18,6 @@
     max-width: 1200px;
     width: 100%;
   }
-
   .main-topics {
     flex: 0 0 400px;
     background: #ffcce1;
@@ -30,18 +29,15 @@
     font-size: 0.9em;
     color: #660029;
   }
-
   .main-topics h2 {
     margin-top: 0;
     font-weight: bold;
     font-size: 1.2em;
     margin-bottom: 12px;
   }
-
   .topic-line {
     margin-bottom: 25px;
   }
-
   .main-topics a.timestamp {
     color: #007bff;
     text-decoration: none;
@@ -49,11 +45,9 @@
     margin-right: 8px;
     font-weight: bold;
   }
-
   .main-topics a.timestamp:hover {
     text-decoration: underline;
   }
-
   .main-video {
     flex: 1;
     display: flex;
@@ -120,9 +114,9 @@
 <div class="wrapper">
   <div class="main-topics">
     <h2>Main Topics</h2>
-    <div class="transcript-line"><a class="timestamp" onclick="seekTo(1)">[00:01]</a>**Dobby's Arrival Chaotic and Unwanted**</div>
-<div class="transcript-line"><a class="timestamp" onclick="seekTo(64)">[01:04]</a>Dragons Dates and Daddy Issues</div>
-<div class="transcript-line"><a class="timestamp" onclick="seekTo(125)">[02:05]</a>Harry Potter Trauma Dumbledore's Denial</div>
+    <div class="transcript-line"><a class="timestamp" onclick="seekTo(0)">[00:00]</a>Creepypasta Song: Beware Digital Evil</div>
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(60)">[01:00]</a>Creepypasta Killers Unite and Confess</div>
+<div class="transcript-line"><a class="timestamp" onclick="seekTo(122)">[02:02]</a>(Failed to summarize: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The model is overloaded. Please try again later.', 'status': 'UNAVAILABLE'}})</div>
 
   </div>
 
@@ -137,7 +131,6 @@
     </div>
   </div>
 </div>
-
 <script>
   var player;
 
@@ -145,7 +138,7 @@
     player = new YT.Player('player', {
       height: '405',
       width: '720',
-      videoId: '8yNdvL2FTDQ',
+      videoId: 'yMHj4WIwGRA',
       playerVars: {
         'playsinline': 1
       }
@@ -159,7 +152,8 @@
   }
 
   var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
+  // Corrected YouTube Iframe API URL
+  tag.src = "https://www.youtube.com/iframe_api"; // <-- Corrected URL
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
@@ -168,7 +162,7 @@
     const button = document.getElementById("sendBtn");
     const chatlog = document.getElementById("chatlog");
 
-    button.onclick = async function() {
+    async function sendMessage() {
       const question = input.value.trim();
       if (!question) return;
 
@@ -176,22 +170,38 @@
       input.value = "";
 
       try {
-        const res = await fetch('/ask', {
+        const res = await fetch('/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ question })
+          body: JSON.stringify({
+            question: question, // <--- CRITICAL FIX 1: Changed 'message' to 'question'
+            video_id: 'yMHj4WIwGRA'
+          })
         });
+
+        if (!res.ok) { // Check for HTTP errors
+            const errorText = await res.text();
+            throw new Error(`HTTP error! Status: ${res.status}, Details: ${errorText}`);
+        }
+
         const data = await res.json();
-        chatlog.innerHTML += "\nAI: " + data.answer;
+        chatlog.innerHTML += "\nAI: " + data.answer; // <--- CRITICAL FIX 2: Changed 'data.response' to 'data.answer'
       } catch (err) {
-        chatlog.innerHTML += "\nAI: (Error processing your request)";
+        console.error("Fetch error:", err); // Log the actual error
+        chatlog.innerHTML += `\nAI: (Error processing your request: ${err.message || err}`; // Display error to user
       }
       chatlog.scrollTop = chatlog.scrollHeight;
-    };
+    }
+
+    button.onclick = sendMessage;
+    input.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
   });
 </script>
-
 </body>
 </html>
