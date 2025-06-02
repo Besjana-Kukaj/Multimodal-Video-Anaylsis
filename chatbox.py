@@ -96,9 +96,8 @@ class ChatHandler:
         print(
             f"\n--- Context for LLM for query '{user_query}': ---\n{context}\n---------------------------------------------\n")
         prompt = (
-            "You are a chatbot that answer questions about videos in which you have the transcript. Based on the provided context, answer the user's question concisely and directly.\n"
+            "You are a chatbot that answer questions about videos in which you have the transcript. Based on the provided context, answer the user's question completely.\n"
             "Use only the following pieces of context to answer the question. "
-            "Do not make up new information. If the answer cannot be found, state that you don't know.\n"
             f"Context:\n{context}\n"
             f"Question: {str(user_query)}\n"
             "Answer:"
