@@ -96,7 +96,7 @@ class ChatHandler:
         print(
             f"\n--- Context for LLM for query '{user_query}': ---\n{context}\n---------------------------------------------\n")
         prompt = (
-            "You are a helpful chatbot. Based on the provided context, answer the user's question concisely and consideratley.\n"
+            "You are a helpful chatbot. Based on the provided context, answer the user's question concisely and directly.\n"
             "Use only the following pieces of context to answer the question. "
             "Do not make up new information. If the answer cannot be found, state that you don't know.\n"
             f"Context:\n{context}\n"
@@ -109,7 +109,7 @@ class ChatHandler:
             result = self.llm.create_completion(
                 prompt=prompt,
                 max_tokens=200,
-                temperature=0.7,
+                temperature=0.2,
                 top_p=0.9,
                 top_k=40,
                 stop=["\nQuestion:", "\nAI:", "\nHuman:", "\nUser:", "\nAssistant:"]
